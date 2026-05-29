@@ -5,26 +5,29 @@
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 
-// Al cargar la página, revisar si hay preferencia guardada
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-    body.classList.add('light-mode');
-    themeToggle.textContent = 'Light';
-} else {
+try {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        body.classList.add('light-mode');
+        themeToggle.textContent = 'Light';
+    } else {
+        themeToggle.textContent = 'Dark';
+    }
+} catch (e) {
     themeToggle.textContent = 'Dark';
 }
 
-// Al hacer click, cambiar y guardar en localStorage
 themeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
-
-    if (body.classList.contains('light-mode')) {
-        localStorage.setItem('theme', 'light');
-        themeToggle.textContent = 'Light';
-    } else {
-        localStorage.setItem('theme', 'dark');
-        themeToggle.textContent = 'Dark';
-    }
+    try {
+        if (body.classList.contains('light-mode')) {
+            localStorage.setItem('theme', 'light');
+            themeToggle.textContent = 'Light';
+        } else {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.textContent = 'Dark';
+        }
+    } catch (e) {}
 });
 
 // =========================================
@@ -40,7 +43,6 @@ navToggle.addEventListener('click', () => {
     navToggle.textContent = isOpen ? 'Cerrar' : 'Menu';
 });
 
-// Cerrar menú al hacer click en un enlace
 navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -55,18 +57,19 @@ navLinks.querySelectorAll('a').forEach(link => {
 
 const nombreInput = document.getElementById('nombre');
 
-// Recuperar nombre guardado si existe
-const savedNombre = localStorage.getItem('contactNombre');
-if (savedNombre) {
-    nombreInput.value = savedNombre;
-}
+try {
+    const savedNombre = localStorage.getItem('contactNombre');
+    if (savedNombre) {
+        nombreInput.value = savedNombre;
+    }
+} catch (e) {}
 
-// Guardar nombre mientras el usuario escribe
 nombreInput.addEventListener('input', () => {
-    localStorage.setItem('contactNombre', nombreInput.value);
+    try {
+        localStorage.setItem('contactNombre', nombreInput.value);
+    } catch (e) {}
 });
 
-// Manejar envío del formulario
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
@@ -80,10 +83,14 @@ contactForm.addEventListener('submit', (e) => {
         return;
     }
 
-    localStorage.removeItem('contactNombre');
+    try {
+        localStorage.removeItem('contactNombre');
+    } catch (e) {}
+
     abrirModal(nombre);
     contactForm.reset();
 });
+
 // =========================================
 // BARRA DE PROGRESO DE SCROLL
 // =========================================
@@ -96,6 +103,7 @@ window.addEventListener('scroll', () => {
     const progress = (scrollTop / docHeight) * 100;
     progressBar.style.width = progress + '%';
 });
+
 // =========================================
 // CONTADOR ANIMADO — BENEFICIOS
 // =========================================
@@ -139,6 +147,7 @@ const seccionBeneficios = document.getElementById('beneficios');
 if (seccionBeneficios) {
     observadorContador.observe(seccionBeneficios);
 }
+
 // =========================================
 // ANIMACIONES DE ENTRADA AL SCROLL
 // =========================================
@@ -151,11 +160,12 @@ const observadorFade = new IntersectionObserver((entradas) => {
             entrada.target.classList.add('visible');
         }
     });
-}, { threshold: 0.15 });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
 elementosFadeIn.forEach(elemento => {
     observadorFade.observe(elemento);
 });
+
 // =========================================
 // MODAL DE CONFIRMACION
 // =========================================
@@ -185,6 +195,7 @@ modalOverlay.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') cerrarModal();
 });
+
 // =========================================
 // NAVBAR — RESALTADO DE ENLACE ACTIVO
 // =========================================
