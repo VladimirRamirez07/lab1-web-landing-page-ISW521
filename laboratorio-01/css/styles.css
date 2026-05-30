@@ -824,3 +824,32 @@ section h2 {
     color: var(--color-primary);
     font-weight: 700;
 }
+/* =========================================
+   BOTON WHATSAPP
+   ========================================= */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: #25d366;
+    color: #ffffff;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+    z-index: 150;
+    transition: var(--transition);
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(37, 211, 102, 0.7);
+}
+
+.whatsapp-btn:focus {
+    outline: 3px solid #25d366;
+    outline-offset: 3px;
+}
