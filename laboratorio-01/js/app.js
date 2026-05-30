@@ -77,6 +77,8 @@ contactForm.addEventListener('submit', (e) => {
 
     const nombre = document.getElementById('nombre').value.trim();
     const correo = document.getElementById('correo').value.trim();
+    const empresa = document.getElementById('empresa').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
 
     if (!nombre || !correo) {
         alert('Por favor completa los campos obligatorios: Nombre y Correo.');
@@ -87,7 +89,7 @@ contactForm.addEventListener('submit', (e) => {
         localStorage.removeItem('contactNombre');
     } catch (e) {}
 
-    abrirModal(nombre);
+    abrirModal(nombre, correo, empresa, mensaje);
     contactForm.reset();
 });
 
@@ -173,9 +175,17 @@ elementosFadeIn.forEach(elemento => {
 const modalOverlay = document.getElementById('modalOverlay');
 const modalMensaje = document.getElementById('modal-mensaje');
 const modalClose = document.getElementById('modalClose');
+const modalWhatsApp = document.getElementById('modalWhatsApp');
 
-function abrirModal(nombre) {
-    modalMensaje.textContent = 'Gracias ' + nombre + ', tu solicitud fue enviada. Uno de nuestros especialistas te contactará en menos de 24 horas.';
+function abrirModal(nombre, correo, empresa, mensaje) {
+    modalMensaje.textContent = 'Gracias ' + nombre + ', tu solicitud fue recibida. Puedes enviarnos los detalles por WhatsApp para una respuesta más rápida.';
+
+    const texto = 'Hola, mi nombre es ' + nombre + '%0A' +
+                  'Correo: ' + correo + '%0A' +
+                  (empresa ? 'Empresa: ' + empresa + '%0A' : '') +
+                  (mensaje ? 'Mensaje: ' + mensaje : '');
+
+    modalWhatsApp.href = 'https://wa.me/50685871316?text=' + texto;
     modalOverlay.classList.add('active');
     modalOverlay.setAttribute('aria-hidden', 'false');
     modalClose.focus();

@@ -853,3 +853,27 @@ section h2 {
     outline: 3px solid #25d366;
     outline-offset: 3px;
 }
+/* =========================================
+   MODAL — BOTONES
+   ========================================= */
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.modal-buttons .btn-secondary {
+    flex: 1;
+}
+
+.btn-whatsapp-modal {
+    flex: 1;
+    text-align: center;
+    background-color: #25d366;
+    color: #ffffff;
+}
+
+.btn-whatsapp-modal:hover {
+    background-color: #1da851;
+    color: #ffffff;
+}
