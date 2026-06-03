@@ -57,7 +57,7 @@ laboratorio-01/
 ├── js/
 │   └── app.js          # JavaScript vanilla
 └── img/
-└── hero-shield.png # Imagen principal del hero
+└── hero-shield.png # Imagen principal del hero de la landing
 ```
 ---
 
